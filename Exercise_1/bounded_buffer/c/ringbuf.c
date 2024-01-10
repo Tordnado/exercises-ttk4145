@@ -2,21 +2,16 @@
 #include <stdlib.h>
 #include <assert.h>
 
-
 struct RingBuffer {
     int* buffer;
     int capacity;
-    
     int insertIdx;
     int removeIdx;
     int length;
-    
 };
-
 
 struct RingBuffer* rb_new(int size){
     struct RingBuffer* rb = malloc(sizeof(struct RingBuffer));
-    
     rb->buffer       = malloc(sizeof(int) * size);
     rb->capacity     = size;
     rb->insertIdx    = 0;
