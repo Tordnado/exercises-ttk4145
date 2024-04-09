@@ -255,17 +255,25 @@ You do not have to answer every question in turn, as long as you address the con
 
 - Condition variables, Java monitors, and Ada protected objects are quite similar in what they do (temporarily yield execution so some other task can unblock us).
   - But in what ways do these mechanisms differ?
+    - They vary in level of pre-coded functionality.
 
 - Bugs in this kind of low-level synchronization can be hard to spot.
   - Which solutions are you most confident are correct?
+    - Ada was very neat, as all the relevant code was gathered in understandable "blocks". No locking in one thread, and unlocking in another as with semaphores.
   - Why, and what does this say about code quality?
+    - It isn't just about the code quality. For example Ada was probably the hardest language to understand what was going on around the code that I wrote personaly, but that has to to with personal experience with the languages.
 
 - We operated only with two priority levels here, but it makes sense for this "kind" of priority resource to support more priorities.
   - How would you extend these solutions to N priorities? Is it even possible to do this elegantly?
+    - Some of the languages like the Go-example with requests made an ordered list on priority. That solution scales well for N number of priorities, but the other Golang-example would be hard to adapt.
   - What (if anything) does that say about code quality?
+    - The same language can have good and bad solutions on the same problem.
 
 - In D's standard library, `getValue` for semaphores is not even exposed (probably because it is not portable – Windows semaphores don't have `getValue`, though you could hack it together with `ReleaseSemaphore()` and `WaitForSingleObject()`).
   - A leading question: Is using `getValue` ever appropriate?
+    - I suppose not, but I don't know why.
   - Explain your intuition: What is it that makes `getValue` so dubious?
+    - GetValue won't necesarily be correct when it is time to use it
 
 - Which one(s) of these different mechanisms do you prefer, both for this specific task and in general? (This is a matter of taste – there are no "right" answers here)
+  - I liked the Golang-example with request-solution
